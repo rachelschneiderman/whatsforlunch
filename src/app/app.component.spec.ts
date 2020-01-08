@@ -1,35 +1,41 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { DebugNode, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
+  let fixture: ComponentFixture<AppComponent>;
+  let appComponent: AppComponent;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        MatToolbarModule
       ],
       declarations: [
         AppComponent
       ],
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    appComponent = fixture.componentInstance;
+
+    fixture.detectChanges();
   }));
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    expect(appComponent).toBeTruthy();
   });
 
-  it(`should have as title 'whatsforlunch'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('whatsforlunch');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('whatsforlunch app is running!');
+  describe('UI', () => {
+    it(`should have a toolbar that displays the app title`, () => {
+      const toolbar: DebugElement = fixture.debugElement.query(By.css('mat-toolbar'));
+      const toolbarText: string = toolbar.nativeElement.textContent;
+  
+      expect(toolbarText).toEqual(appComponent.title);
+    });
   });
 });
