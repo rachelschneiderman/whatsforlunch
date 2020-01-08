@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { DebugNode, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { MatSelectModule } from '@angular/material/select';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -13,7 +15,9 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        MatToolbarModule
+        NoopAnimationsModule,
+        MatToolbarModule,
+        MatSelectModule
       ],
       declarations: [
         AppComponent
@@ -31,11 +35,23 @@ describe('AppComponent', () => {
   });
 
   describe('UI', () => {
-    it(`should have a toolbar that displays the app title`, () => {
+    it('should have a toolbar that displays the app title', () => {
       const toolbar: DebugElement = fixture.debugElement.query(By.css('mat-toolbar'));
       const toolbarText: string = toolbar.nativeElement.textContent;
   
       expect(toolbarText).toEqual(appComponent.title);
+    });
+
+    it('should display a select list of cuisines', () => {
+      const cuisineSelect: DebugElement = fixture.debugElement.query(By.css('#cuisines'));      
+
+      expect(cuisineSelect).toBeDefined();
+    });
+
+    it('should display a select list of distances', () => {
+      const distanceSelect: DebugElement = fixture.debugElement.query(By.css('#distances'));      
+
+      expect(distanceSelect).toBeDefined();
     });
   });
 });

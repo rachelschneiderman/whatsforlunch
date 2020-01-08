@@ -1,2 +1,22 @@
-<mat-toolbar>{{ title }}</mat-toolbar>
+<mat-toolbar color="primary">{{ title }}</mat-toolbar>
+
+<h4>Cuisine</h4>
+<mat-form-field>
+  <mat-label>Cuisine</mat-label>
+  <mat-select id="cuisines">
+    <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine.value">
+      {{ cuisine.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<h4>Distance</h4>
+<mat-form-field>
+  <mat-label>Distance</mat-label>
+  <mat-select id="distances">
+    <mat-option *ngFor="let distance of distances" [value]="distance">
+      {{ distance }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
